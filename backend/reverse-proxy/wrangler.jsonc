@@ -1,0 +1,13 @@
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "makethumb-reverse-proxy",
+	"main": "src/index.js",
+	"compatibility_flags": ["nodejs_compat"],
+	"compatibility_date": "2025-07-26",
+
+	"observability": {
+		"enabled": true
+	},
+	"routes": ["*.makethumb.app/*"],
+	"placement": { "mode": "smart" }
+}
