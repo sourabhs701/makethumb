@@ -1,0 +1,51 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "makethumb-api-server",
+  "main": "src/index.ts",
+  "compatibility_date": "2025-10-11",
+  "observability": {
+    "enabled": true
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "makethumb",
+      "database_id": "e8ee4764-0f73-4bcc-a25b-b62cdf07f537",
+      "migrations_dir": "src/db/migrations"
+    }
+  ],
+  "durable_objects": {
+    "bindings": [
+      {
+        "name": "BuildContainer",
+        "class_name": "BuildContainer"
+      }
+    ]
+  },
+  "migrations": [
+    {
+      "tag": "v1",
+      "new_sqlite_classes": ["BuildContainer"]
+    }
+  ],
+  "containers": [
+    {
+      "max_instances": 3,
+      "class_name": "BuildContainer",
+      "image": "./build-container/Dockerfile",
+      "instance_type": "standard"
+    }
+  ],
+  "r2_buckets": [
+    {
+      "binding": "R2",
+      "bucket_name": "makethumb-r2"
+    }
+  ],
+  "routes": [
+    {
+      "pattern": "api.makethumb.com",
+      "custom_domain": true
+    }
+  ]
+}
